@@ -1,0 +1,46 @@
+server:
+  port: 9191
+
+management:
+  endpoints.web.exposure.include: '*'
+
+spring:
+  application:
+    name: jwt-sample
+  datasource:
+    url: jdbc:h2:mem:mydb
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: ${GOOGLE_CLIENT_ID}
+            clientSecret: ${GOOGLE_CLIENT_SECRET}
+            redirectUri: "http://localhost:9191/login/oauth2/code/google"
+          facebook:
+            clientId: ${FACEBOOK_CLIENT_ID}
+            clientSecret: ${FACEBOOK_CLIENT_SECRET}
+            redirectUri: "http://localhost:9191/login/oauth2/code/facebook"
+
+# ===================================================================
+# Application properties
+# ===================================================================
+application:
+  domain: localhost
+  security:
+    jwt:
+      secret: 3F4528482B4D6251655368566D597133743677397A24432646294A404E635266
+      access-token.expires-in: 300
+      refresh-token.expires-in: 604800
+    cors:
+      allowed-origins: "http://localhost:3000"
+      allowed-methods: "*"
+      allowed-headers: "*"
+      max-age: 1800
+      exposed-headers: "Authorization,Link,X-Total-Count"

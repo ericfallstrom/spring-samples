@@ -1,0 +1,19 @@
+server:
+  port: 9191
+
+management:
+  endpoints.web.exposure.include: '*'
+
+spring:
+  application:
+    name: spring-data-sample
+  datasource:
+    url: jdbc:tc:postgresql:14.6:///spring_data_sample?currentSchema=spring_data_sample
+    username: spring_data_sample
+    password: spring_data_sample
+
+# ===================================================================
+# Application properties
+# ===================================================================
+application:
+  domain: localhost
